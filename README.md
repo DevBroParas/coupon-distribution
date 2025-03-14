@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Coupon App
 
-## Getting Started
+This project is a simple coupon distribution application built with React. Users can claim coupons and are subjected to a cooldown period before they can claim another coupon.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Claim a coupon with a single click.
+- Display a cooldown timer to prevent multiple claims within a short period.
+- Show toast notifications for successful coupon claims.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd coupen-app
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+1. Start the development server:
+   ```sh
+   npm run dev
+   ```
+2. Open your browser and navigate to `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `Page`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This is the main component of the application. It handles the state and logic for claiming coupons and displaying the cooldown timer.
 
-## Deploy on Vercel
+#### State Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `message`: Stores the message returned from the server after claiming a coupon.
+- `coupon`: Stores the coupon code returned from the server.
+- `cooldownEndTime`: Stores the end time of the cooldown period.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Functions
+
+- `claimCoupon`: Fetches a coupon from the server and updates the state.
+- `getRemainingTime`: Calculates the remaining cooldown time.
+- `formatTime`: Formats the cooldown time in minutes and seconds.
+
+## API
+
+The application interacts with API endpoints to claim and seed coupons.
+
+- `GET /api/claim`: Returns a JSON object with the following structure:
+
+  ```json
+  {
+    "message": "Coupon claimed successfully!",
+    "code": "COUPON123",
+    "cooldownEndTime": 1633036800000
+  }
+  ```
+
+- `POST /api/seed`: Seeds the database with initial coupon data. Returns a JSON object with the following structure:
+  ```json
+  {
+    "message": "Database seeded successfully!"
+  }
+  ```
+
+## Dependencies
+
+- `react`: JavaScript library for building user interfaces.
+- `react-toastify`: Library for displaying toast notifications.
+
+## Abuse Prevention Strategies
+
+To prevent abuse and ensure fair distribution of coupons, the following strategies have been implemented:
+
+- **Cooldown Period**: After claiming a coupon, users must wait for a specified cooldown period before they can claim another coupon. This is managed by storing the `cooldownEndTime` in the local storage and checking it before allowing another claim.
+- **Local Storage**: The cooldown end time is stored in the user's local storage to persist the cooldown state even if the page is refreshed or the browser is closed and reopened.
