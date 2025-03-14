@@ -73,7 +73,20 @@ The application interacts with API endpoints to claim and seed coupons.
 ## Dependencies
 
 - `react`: JavaScript library for building user interfaces.
+- `react-dom`: Entry point of the DOM-related rendering paths.
+- `next`: React framework for server-side rendering and static site generation.
 - `react-toastify`: Library for displaying toast notifications.
+- `mongoose`: MongoDB object modeling tool designed to work in an asynchronous environment.
+- `cookie`: Simple, lightweight JavaScript API for handling cookies.
+- `next-cookies`: Helper to manage cookies in Next.js.
+
+### Dev Dependencies
+
+- `eslint`: Pluggable JavaScript linter.
+- `eslint-config-next`: ESLint configuration used by Next.js.
+- `@eslint/eslintrc`: ESLint configuration.
+- `@tailwindcss/postcss`: Tailwind CSS PostCSS plugin.
+- `tailwindcss`: Utility-first CSS framework for rapid UI development.
 
 ## Abuse Prevention Strategies
 
